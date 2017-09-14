@@ -8,7 +8,7 @@ const height = 500;
 const padding = {
   bottom: 50,
   left: 50,
-  right: 50,
+  right: 120,
   top: 50
 };
 
@@ -30,6 +30,24 @@ const chart = d3.select('#chart')
   .attr('width', width)
   .attr('height', height);
 
+const point = chart.selectAll('g')
+  .data(cyclistData)
+  .enter()
+  .append('g')
+  .attr('transform',
+    ({Seconds, Place}) =>
+      `translate(${xScale(Seconds - minTime)}, ${yScale(Place)})`);
+
+point.append('circle')
+  .attr('r', 5)
+  .attr('fill', ({Doping}) => Doping ? 'red' : 'black');
+
+point.append('text')
+  .attr('font-size', 11)
+  .attr('x', 15)
+  .attr('dy', '.35em')
+  .text(({Name}) => Name);
+
 chart.append('g')
   .attr('transform', `translate(0, ${height - padding.bottom})`)
   .call(d3.axisBottom(xScale).tickFormat(toHumanReadableTime));
@@ -37,12 +55,3 @@ chart.append('g')
 chart.append('g')
   .attr('transform', `translate(${padding.left}, 0)`)
   .call(d3.axisLeft(yScale));
-
-chart.selectAll('circle')
-  .data(cyclistData)
-  .enter()
-  .append('circle')
-  .attr('r', 5)
-  .attr('fill', ({Doping}) => Doping ? 'red' : 'black')
-  .attr('cx', ({Seconds}) => xScale(Seconds - minTime))
-  .attr('cy', ({Place}) => yScale(Place));
