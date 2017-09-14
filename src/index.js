@@ -15,15 +15,15 @@ const padding = {
 const minTime = d3.min(cyclistData, ({Seconds}) => Seconds);
 const maxTime = d3.max(cyclistData, ({Seconds}) => Seconds);
 
+const minPlace = d3.min(cyclistData, ({Place}) => Place);
+const maxPlace = d3.max(cyclistData, ({Place}) => Place);
+
 const xScale = d3.scaleLinear()
   .domain([0, maxTime - minTime + 10])
   .range([width - padding.right, padding.left]);
 
 const yScale = d3.scaleLinear()
-  .domain([
-    d3.min(cyclistData, (d) => d.Place),
-    d3.max(cyclistData, (d) => d.Place) + 1,
-  ])
+  .domain([minPlace, maxPlace + 1])
   .range([padding.top, height - padding.bottom]);
 
 const chart = d3.select('#chart')
