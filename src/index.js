@@ -37,3 +37,12 @@ chart.append('g')
 chart.append('g')
   .attr('transform', `translate(${padding.left}, 0)`)
   .call(d3.axisLeft(yScale));
+
+chart.selectAll('circle')
+  .data(cyclistData)
+  .enter()
+  .append('circle')
+  .attr('r', 5)
+  .attr('fill', ({Doping}) => Doping ? 'red' : 'black')
+  .attr('cx', ({Seconds}) => xScale(Seconds - minTime))
+  .attr('cy', ({Place}) => yScale(Place));
