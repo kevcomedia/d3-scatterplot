@@ -16,13 +16,13 @@ const minTime = d3.min(cyclistData, ({Seconds}) => Seconds);
 const maxTime = d3.max(cyclistData, ({Seconds}) => Seconds);
 
 const xScale = d3.scaleLinear()
-  .domain([0, maxTime - minTime])
+  .domain([0, maxTime - minTime + 10])
   .range([width - padding.right, padding.left]);
 
 const yScale = d3.scaleLinear()
   .domain([
     d3.min(cyclistData, (d) => d.Place),
-    d3.max(cyclistData, (d) => d.Place),
+    d3.max(cyclistData, (d) => d.Place) + 1,
   ])
   .range([padding.top, height - padding.bottom]);
 
