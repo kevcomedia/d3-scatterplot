@@ -1,28 +1,39 @@
 import * as d3 from './d3.exports.js';
+import cyclistData from '../data/cyclist-data.json';
 
-/**
- * Feel free to modify/remove anything below.
- */
+import {toHumanReadableTime} from './utils.js';
 
-const data = [20, 10, 30];
+const width = 1000;
+const height = 500;
+const padding = {
+  bottom: 50,
+  left: 50,
+  right: 50,
+  top: 50
+};
 
-const svg = d3.select('#chart')
-  .attr('width', 600)
-  .attr('height', 300);
+const minTime = d3.min(cyclistData, ({Seconds}) => Seconds);
+const maxTime = d3.max(cyclistData, ({Seconds}) => Seconds);
 
 const xScale = d3.scaleLinear()
-  .domain([0, data.length - 1])
-  .range([100, 500]);
+  .domain([0, maxTime - minTime])
+  .range([width - padding.right, padding.left]);
 
-const colorScale = d3.scaleLinear()
-  .domain([d3.min(data), d3.max(data)])
-  .range(['orange', 'blue']);
+const yScale = d3.scaleLinear()
+  .domain([
+    d3.min(cyclistData, (d) => d.Place),
+    d3.max(cyclistData, (d) => d.Place),
+  ])
+  .range([padding.top, height - padding.bottom]);
 
-svg.selectAll('circle')
-  .data(data)
-  .enter()
-  .append('circle')
-  .attr('fill', (d) => colorScale(d))
-  .attr('cx', (d, i) => xScale(i))
-  .attr('cy', 150)
-  .attr('r', (d) => d * 3);
+const chart = d3.select('#chart')
+  .attr('width', width)
+  .attr('height', height);
+
+chart.append('g')
+  .attr('transform', `translate(0, ${height - padding.bottom})`)
+  .call(d3.axisBottom(xScale).tickFormat(toHumanReadableTime));
+
+chart.append('g')
+  .attr('transform', `translate(${padding.left}, 0)`)
+  .call(d3.axisLeft(yScale));
