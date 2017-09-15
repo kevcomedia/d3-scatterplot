@@ -1,7 +1,7 @@
 import * as d3 from './d3.exports.js';
 import cyclistData from '../data/cyclist-data.json';
 
-import {toHumanReadableTime} from './utils.js';
+import {toHumanReadableTime} from './utils/utils.js';
 
 const width = 1000;
 const height = 500;
