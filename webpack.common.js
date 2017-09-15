@@ -5,7 +5,7 @@ const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 module.exports = {
   entry: {
     index: './src/index.js',
-    styles: './src/styles.js'
+    styles: './src/styles/styles.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
