@@ -30,13 +30,26 @@ const chart = d3.select('#chart')
   .attr('width', width)
   .attr('height', height);
 
+const tooltip = d3.select('.tooltip');
+
 const point = chart.selectAll('g')
   .data(cyclistData)
   .enter()
   .append('g')
   .attr('transform',
     ({Seconds, Place}) =>
-      `translate(${xScale(Seconds - minTime)}, ${yScale(Place)})`);
+      `translate(${xScale(Seconds - minTime)}, ${yScale(Place)})`)
+  .on('mouseover', ({Doping, Name, Nationality, Time, Year}) => {
+    const tooltipText = `<p>${Name} (${Nationality})</p>
+      <p>Year: ${Year}, Time: ${Time}</p>
+      ${Doping ? `<p>${Doping}</p>` : ''}`;
+
+    tooltip.html(tooltipText);
+    tooltip.classed('tooltip-isActive', true);
+  })
+  .on('mouseout', () => {
+    tooltip.classed('tooltip-isActive', false);
+  });
 
 point.append('circle')
   .attr('r', 5)

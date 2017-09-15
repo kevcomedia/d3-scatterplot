@@ -11,3 +11,23 @@ h1 {
   display: block;
   margin: auto;
 }
+
+.tooltip {
+  background-color: #444;
+  color: #eee;
+  font-size: .9em;
+  opacity: 0;
+  text-align: center;
+  transition: opacity ease-in .15s;
+
+  width: 200px;
+  padding: 10px;
+
+  position: absolute;
+  left: 250px;
+  top: 150px;
+
+  &-isActive {
+    opacity: .9;
+  }
+}
