@@ -13,18 +13,15 @@ const padding = {
   top: 50
 };
 
-const minTime = d3.min(cyclistData, ({Seconds}) => Seconds);
-const maxTime = d3.max(cyclistData, ({Seconds}) => Seconds);
-
-const minPlace = d3.min(cyclistData, ({Place}) => Place);
-const maxPlace = d3.max(cyclistData, ({Place}) => Place);
+const times = d3.extent(cyclistData, ({Seconds}) => Seconds);
+const places = d3.extent(cyclistData, ({Place}) => Place);
 
 const xScale = d3.scaleLinear()
-  .domain([0, maxTime - minTime + 10])
+  .domain([0, times[1] - times[0] + 10])
   .range([width - padding.right, padding.left]);
 
 const yScale = d3.scaleLinear()
-  .domain([minPlace, maxPlace + 1])
+  .domain([places[0], places[1] + 1])
   .range([padding.top, height - padding.bottom]);
 
 const chart = d3.select('#chart')
@@ -39,7 +36,7 @@ const point = chart.selectAll('g')
   .append('g')
   .attr('transform',
     ({Seconds, Place}) =>
-      `translate(${xScale(Seconds - minTime)}, ${yScale(Place)})`)
+      `translate(${xScale(Seconds - times[0])}, ${yScale(Place)})`)
   .on('mouseover', (d) => {
     tooltip
       .setText(d)
