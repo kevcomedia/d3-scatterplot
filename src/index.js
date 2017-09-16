@@ -67,6 +67,14 @@ chart.append('text')
   .style('text-anchor', 'end')
   .text('Minutes Behind Fastest Time');
 
+// Left axis
 chart.append('g')
   .attr('transform', `translate(${padding.left}, 0)`)
   .call(d3.axisLeft(yScale));
+
+chart.append('text')
+  .attr('x', -padding.top)
+  .attr('y', padding.left + 20)
+  .attr('transform', 'rotate(-90)')
+  .style('text-anchor', 'end')
+  .text('Rank');
