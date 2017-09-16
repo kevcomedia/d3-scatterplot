@@ -56,9 +56,16 @@ point.append('text')
   .attr('dy', '.35em')
   .text(({Name}) => Name);
 
+// Bottom axis
 chart.append('g')
   .attr('transform', `translate(0, ${height - padding.bottom})`)
   .call(d3.axisBottom(xScale).tickFormat(toHumanReadableTime));
+
+chart.append('text')
+  .attr('x', width - padding.right)
+  .attr('y', height - padding.bottom - 5)
+  .style('text-anchor', 'end')
+  .text('Minutes Behind Fastest Time');
 
 chart.append('g')
   .attr('transform', `translate(${padding.left}, 0)`)
