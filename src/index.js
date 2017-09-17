@@ -91,7 +91,7 @@ const legend = {
 legend.allegation
   .attr(
     'transform',
-    `translate(${4 * width / 6}, ${height - padding.bottom + 35})`);
+    `translate(${4 * width / 6}, ${height - (padding.bottom / 2)})`);
 
 legend.allegation
   .append('circle')
@@ -107,7 +107,7 @@ legend.allegation
 legend.noAllegation
   .attr(
     'transform',
-    `translate(${5 * width / 6}, ${height - padding.bottom + 35})`);
+    `translate(${5 * width / 6}, ${height - (padding.bottom / 2)})`);
 
 legend.noAllegation
   .append('circle')
