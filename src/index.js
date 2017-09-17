@@ -13,6 +13,11 @@ const padding = {
   top: 10
 };
 
+const dopingColor = {
+  true: 'red',
+  false: 'black'
+};
+
 const times = d3.extent(cyclistData, ({Seconds}) => Seconds);
 const places = d3.extent(cyclistData, ({Place}) => Place);
 
@@ -48,10 +53,9 @@ const point = chart.selectAll('g')
 
 point.append('circle')
   .attr('r', 5)
-  .attr('fill', ({Doping}) => Doping ? 'red' : 'black');
+  .attr('fill', ({Doping}) => dopingColor[!!Doping]);
 
 point.append('text')
-  .attr('font-size', 11)
   .attr('x', 15)
   .attr('dy', '.35em')
   .text(({Name}) => Name);
@@ -79,41 +83,37 @@ chart.append('text')
   .style('text-anchor', 'end')
   .text('Rank');
 
-const legend = {
-  allegation: chart.append('g'),
-  noAllegation: chart.append('g')
-};
+addLegend(chart, {
+  text: 'Doping Allegations',
+  fill: dopingColor.true,
+  pos: 4
+});
+addLegend(chart, {
+  text: 'No Doping Allegations',
+  fill: dopingColor.false,
+  pos: 5
+});
 
-legend.allegation
-  .attr(
-    'transform',
-    `translate(${4 * width / 6}, ${height - padding.bottom + 35})`);
+/**
+ * Appends a legend on the chart with the given details.
+ *
+ * @param {object} chart The chart to append a legend to.
+ * @return {object} The legend.
+ */
+function addLegend(chart, {text = '', fill = '', parts = 6, pos = 0} = {}) {
+  const legend = chart.append.call(chart, 'g')
+    .attr(
+      'transform',
+      `translate(${pos * width / parts}, ${height - (padding.bottom / 2)})`);
 
-legend.allegation
-  .append('circle')
-  .attr('r', 5)
-  .attr('fill', 'red');
+  legend.append('circle')
+    .attr('r', 5)
+    .attr('fill', fill);
 
-legend.allegation
-  .append('text')
-  .attr('font-size', 11)
-  .attr('x', 15)
-  .attr('dy', '.35em')
-  .text('Doping Allegations');
+  legend.append('text')
+    .attr('x', 15)
+    .attr('dy', '.35em')
+    .text(text);
 
-legend.noAllegation
-  .attr(
-    'transform',
-    `translate(${5 * width / 6}, ${height - padding.bottom + 35})`);
-
-legend.noAllegation
-  .append('circle')
-  .attr('r', 5)
-  .attr('fill', 'black');
-
-legend.noAllegation
-  .append('text')
-  .attr('font-size', 11)
-  .attr('x', 15)
-  .attr('dy', '.35em')
-  .text('No Doping Allegations');
+  return legend;
+}
