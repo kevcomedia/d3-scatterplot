@@ -7,7 +7,7 @@ import {toHumanReadableTime} from './utils/utils.js';
 const width = 1000;
 const height = 500;
 const padding = {
-  bottom: 50,
+  bottom: 70,
   left: 50,
   right: 120,
   top: 10
@@ -78,3 +78,42 @@ chart.append('text')
   .attr('transform', 'rotate(-90)')
   .style('text-anchor', 'end')
   .text('Rank');
+
+const legend = {
+  allegation: chart.append('g'),
+  noAllegation: chart.append('g')
+};
+
+legend.allegation
+  .attr(
+    'transform',
+    `translate(${4 * width / 6}, ${height - padding.bottom + 35})`);
+
+legend.allegation
+  .append('circle')
+  .attr('r', 5)
+  .attr('fill', 'red');
+
+legend.allegation
+  .append('text')
+  .attr('font-size', 11)
+  .attr('x', 15)
+  .attr('dy', '.35em')
+  .text('Doping Allegations');
+
+legend.noAllegation
+  .attr(
+    'transform',
+    `translate(${5 * width / 6}, ${height - padding.bottom + 35})`);
+
+legend.noAllegation
+  .append('circle')
+  .attr('r', 5)
+  .attr('fill', 'black');
+
+legend.noAllegation
+  .append('text')
+  .attr('font-size', 11)
+  .attr('x', 15)
+  .attr('dy', '.35em')
+  .text('No Doping Allegations');
