@@ -51,7 +51,6 @@ point.append('circle')
   .attr('fill', ({Doping}) => Doping ? 'red' : 'black');
 
 point.append('text')
-  .attr('font-size', 11)
   .attr('x', 15)
   .attr('dy', '.35em')
   .text(({Name}) => Name);
@@ -96,7 +95,6 @@ legend.allegation
 
 legend.allegation
   .append('text')
-  .attr('font-size', 11)
   .attr('x', 15)
   .attr('dy', '.35em')
   .text('Doping Allegations');
@@ -113,7 +111,6 @@ legend.noAllegation
 
 legend.noAllegation
   .append('text')
-  .attr('font-size', 11)
   .attr('x', 15)
   .attr('dy', '.35em')
   .text('No Doping Allegations');
