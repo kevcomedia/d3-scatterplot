@@ -45,5 +45,10 @@
   },
   "dependencies": {
     "d3": "^4.10.2"
+  },
+  "git": {
+    "scripts": {
+      "pre-push": "npm run deploy"
+    }
   }
 }
