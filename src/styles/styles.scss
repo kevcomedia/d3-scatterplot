@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Asap+Condensed');
+
 $bodyBackground: #7389ae;
 
 body {
   background: $bodyBackground;
   background: linear-gradient(90deg, $bodyBackground, lighten($bodyBackground, 15%));
   color: #444;
-  font-family: sans-serif;
+  font-family: 'Asap Condensed', sans-serif;
 }
 
 h1,
@@ -30,6 +32,7 @@ h1 {
 }
 
 #chart {
+  font-family: sans-serif;
   display: block;
   margin: auto;
 }
