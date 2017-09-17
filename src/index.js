@@ -13,6 +13,11 @@ const padding = {
   top: 10
 };
 
+const dopingColor = {
+  true: 'red',
+  false: 'black'
+};
+
 const times = d3.extent(cyclistData, ({Seconds}) => Seconds);
 const places = d3.extent(cyclistData, ({Place}) => Place);
 
@@ -48,7 +53,7 @@ const point = chart.selectAll('g')
 
 point.append('circle')
   .attr('r', 5)
-  .attr('fill', ({Doping}) => Doping ? 'red' : 'black');
+  .attr('fill', ({Doping}) => dopingColor[!!Doping]);
 
 point.append('text')
   .attr('x', 15)
@@ -91,7 +96,7 @@ legend.allegation
 legend.allegation
   .append('circle')
   .attr('r', 5)
-  .attr('fill', 'red');
+  .attr('fill', dopingColor.true);
 
 legend.allegation
   .append('text')
@@ -107,7 +112,7 @@ legend.noAllegation
 legend.noAllegation
   .append('circle')
   .attr('r', 5)
-  .attr('fill', 'black');
+  .attr('fill', dopingColor.false);
 
 legend.noAllegation
   .append('text')
