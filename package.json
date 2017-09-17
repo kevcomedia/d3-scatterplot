@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "deploy": "npm run build && surge -p dist -d gckev-scatterplot.surge.sh"
   },
   "repository": {
     "type": "git",
@@ -30,10 +31,12 @@
     "eslint": "^4.6.1",
     "eslint-config-google": "^0.9.1",
     "eslint-loader": "^1.9.0",
+    "git-scripts": "^0.2.1",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "surge": "^0.19.0",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.5.6",
     "webpack-build-notifier": "^0.1.16",
@@ -42,5 +45,10 @@
   },
   "dependencies": {
     "d3": "^4.10.2"
+  },
+  "git": {
+    "scripts": {
+      "pre-push": "npm run deploy"
+    }
   }
 }
