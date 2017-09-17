@@ -8,7 +8,7 @@ export function createTooltip() {
 
   return {
     setText({Doping, Name, Nationality, Time, Year}) {
-      const tooltipText = `<p>${Name} (${Nationality})</p>
+      const tooltipText = `<h4>${Name} (${Nationality})</h4>
         <p>Year: ${Year}, Time: ${Time}</p>
         ${Doping ? `<p>${Doping}</p>` : ''}`;
 

@@ -10,7 +10,7 @@ const padding = {
   bottom: 50,
   left: 50,
   right: 120,
-  top: 50
+  top: 10
 };
 
 const times = d3.extent(cyclistData, ({Seconds}) => Seconds);
