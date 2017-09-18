@@ -1,6 +1,6 @@
 {
   "name": "d3-scatterplot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "freeCodeCamp D3 scatterplot project",
   "main": "index.js",
   "scripts": {
