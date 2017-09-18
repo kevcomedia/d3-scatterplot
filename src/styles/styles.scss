@@ -4,7 +4,7 @@ $bodyBackground: #7389ae;
 
 body {
   background: $bodyBackground;
-  background: linear-gradient(90deg, $bodyBackground, lighten($bodyBackground, 15%));
+  background: linear-gradient(90deg, $bodyBackground, lighten($bodyBackground, 15%)) fixed;
   color: #444;
   font-family: 'Asap Condensed', sans-serif;
 }
